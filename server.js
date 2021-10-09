@@ -1,3 +1,10 @@
+// for closing the cmd window as soon as possible
+;['SIGTERM', 'SIGINT', 'SIGUSR2', 'SIGBREAK'].forEach(function (m) {
+	process.on(m, function () {
+		process.exit()
+	})
+})
+
 const fs = require('fs'),
 	http = require('http'),
 	path = require('path'),
