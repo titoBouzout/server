@@ -1,2 +1,2 @@
-node "%~dp0server.js" "%~f1"
+node "%~dp0serve.js" "%~f1"
 exit
