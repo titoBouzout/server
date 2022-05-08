@@ -8,7 +8,8 @@
 const fs = require('fs'),
 	http = require('http'),
 	path = require('path'),
-	exec = require('child_process').exec
+	exec = require('child_process').exec,
+	open = require('open')
 
 const root = path.resolve(process.argv.slice(2).join(''))
 
@@ -16,7 +17,7 @@ console.log('root directory is: "' + root + '"')
 ;(function server() {
 	const port = seededRandom(1025, 65534)
 
-	browser('http://localhost:' + port + '/')
+	open('http://localhost:' + port + '/')
 
 	console.log('http://localhost:' + port + '/')
 
@@ -106,40 +107,4 @@ function exists(f) {
 		.catch(err => {
 			return false
 		})
-}
-
-function is_osx() {
-	return process.platform == 'darwin'
-}
-
-function browser(url) {
-	if (is_osx()) {
-		exec('open -a "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" ' + url)
-	} else {
-		let chrome = [
-			'chrome.exe',
-			'%HOMEPATH%\\AppData\\Local\\Google\\Chrome\\Application\\chrome.exe',
-			'%HOMEPATH%\\Chromium\\Application\\chrome.exe',
-			'%HOMEPATH%\\Google\\Chrome\\Application\\chrome.exe',
-			'%HOMEPATH%\\Local Settings\\Application Data\\Google\\Chrome\\Application\\chrome.exe',
-			'%PROGRAMFILES%\\Chromium\\Application\\chrome.exe',
-			'%PROGRAMFILES%\\Google\\Chrome Dev\\Application\\chrome.exe',
-			'%PROGRAMFILES%\\Google\\Chrome\\Application\\chrome.exe',
-			'%PROGRAMFILES(X86)%\\Google\\Chrome Dev\\Application\\chrome.exe',
-			'%PROGRAMFILES(X86)%\\Chromium\\Application\\chrome.exe',
-			'%PROGRAMFILES(X86)%\\Google\\Chrome\\Application\\chrome.exe',
-			'%USERPROFILE%\\Local Settings\\Application Data\\Google\\Chrome\\chrome.exe',
-		]
-		function open_chrome() {
-			if (chrome.length) {
-				let browser = chrome.shift()
-				exec('"' + browser + '" ' + url, function (err) {
-					if (err) {
-						open_chrome()
-					}
-				})
-			}
-		}
-		open_chrome()
-	}
 }
