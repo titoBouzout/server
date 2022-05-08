@@ -23,6 +23,8 @@ console.log('root directory is: "' + root + '"')
 
 	http
 		.createServer(async function (req, res) {
+			let mime = require('mime-types')
+
 			const request = req.url.replace(/^\//, '').replace(/\?.*/g, '')
 			let file = path.join(root, decodeURIComponent(request))
 			let folder = file.replace(root, '')
@@ -45,6 +47,7 @@ console.log('root directory is: "' + root + '"')
 							let link = path.join(folder, f).replace(/\\/g, '/')
 							content += '<li><a href="' + link + '">' + f + '</a>'
 						})
+						res.setHeader('Content-Type', 'text/html')
 						res.writeHead(200)
 						res.end(content)
 					})
@@ -52,16 +55,19 @@ console.log('root directory is: "' + root + '"')
 					console.log('serving file 200', file)
 
 					// serve file
+					res.setHeader('Content-Type', mime.lookup(file))
 					res.writeHead(200)
 					res.end(Buffer.from(await fs.promises.readFile(file)))
 				} else {
 					console.log('Not Found 404', file)
 
 					// Not Found
+					res.setHeader('Content-Type', 'text/html')
 					res.writeHead(404)
 					res.end()
 				}
 			} catch (e) {
+				res.setHeader('Content-Type', 'text/html')
 				res.writeHead(500)
 				res.end(Buffer.from(JSON.stringify(e)))
 			}
