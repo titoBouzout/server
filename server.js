@@ -20,7 +20,7 @@ console.log('root directory is: "' + root + '"')
 
 	console.log('http://localhost:' + port + '/')
 
-	require('http')
+	http
 		.createServer(async function (req, res) {
 			const request = req.url.replace(/^\//, '').replace(/\?.*/g, '')
 			let file = path.join(root, decodeURIComponent(request))
@@ -68,15 +68,7 @@ console.log('root directory is: "' + root + '"')
 		.listen(port)
 })()
 
-function xmur3(str) {
-	for (var i = 0, h = 1779033703 ^ str.length; i < str.length; i++)
-		(h = Math.imul(h ^ str.charCodeAt(i), 3432918353)), (h = (h << 13) | (h >>> 19))
-	return function () {
-		h = Math.imul(h ^ (h >>> 16), 2246822507)
-		h = Math.imul(h ^ (h >>> 13), 3266489909)
-		return (h ^= h >>> 16) >>> 0
-	}
-}
+// used to always use the same port for a given folder
 
 function seededRandom(min, max) {
 	let seed = xmur3(root)()
@@ -85,6 +77,16 @@ function seededRandom(min, max) {
 	let rnd = seed / 233280
 
 	return (min + rnd * (max - min)) | 0
+}
+
+function xmur3(str) {
+	for (var i = 0, h = 1779033703 ^ str.length; i < str.length; i++)
+		(h = Math.imul(h ^ str.charCodeAt(i), 3432918353)), (h = (h << 13) | (h >>> 19))
+	return function () {
+		h = Math.imul(h ^ (h >>> 16), 2246822507)
+		h = Math.imul(h ^ (h >>> 13), 3266489909)
+		return (h ^= h >>> 16) >>> 0
+	}
 }
 
 function isDirectory(f) {
@@ -106,6 +108,38 @@ function exists(f) {
 		})
 }
 
+function is_osx() {
+	return process.platform == 'darwin'
+}
+
 function browser(url) {
-	exec('chrome ' + url)
+	if (is_osx()) {
+		exec('open -a "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" ' + url)
+	} else {
+		let chrome = [
+			'chrome.exe',
+			'%HOMEPATH%\\AppData\\Local\\Google\\Chrome\\Application\\chrome.exe',
+			'%HOMEPATH%\\Chromium\\Application\\chrome.exe',
+			'%HOMEPATH%\\Google\\Chrome\\Application\\chrome.exe',
+			'%HOMEPATH%\\Local Settings\\Application Data\\Google\\Chrome\\Application\\chrome.exe',
+			'%PROGRAMFILES%\\Chromium\\Application\\chrome.exe',
+			'%PROGRAMFILES%\\Google\\Chrome Dev\\Application\\chrome.exe',
+			'%PROGRAMFILES%\\Google\\Chrome\\Application\\chrome.exe',
+			'%PROGRAMFILES(X86)%\\Google\\Chrome Dev\\Application\\chrome.exe',
+			'%PROGRAMFILES(X86)%\\Chromium\\Application\\chrome.exe',
+			'%PROGRAMFILES(X86)%\\Google\\Chrome\\Application\\chrome.exe',
+			'%USERPROFILE%\\Local Settings\\Application Data\\Google\\Chrome\\chrome.exe',
+		]
+		function open_chrome() {
+			if (chrome.length) {
+				let browser = chrome.shift()
+				exec('"' + browser + '" ' + url, function (err) {
+					if (err) {
+						open_chrome()
+					}
+				})
+			}
+		}
+		open_chrome()
+	}
 }
