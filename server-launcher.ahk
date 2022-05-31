@@ -16,7 +16,7 @@ GetActiveExplorerPath() {
 ~F12::
     Path:= GetActiveExplorerPath()
     if (Path!="") {
-        Run, server "%Path%",, Hide
+        Run, server.cmd "%Path%",, Hide
     }
 
 return
