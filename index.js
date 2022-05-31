@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 // for closing the cmd window as soon as possible
 ;['SIGTERM', 'SIGINT', 'SIGUSR2', 'SIGBREAK'].forEach(function (m) {
 	process.on(m, function () {
