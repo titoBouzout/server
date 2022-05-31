@@ -1,6 +1,34 @@
 {
-  "dependencies": {
-    "mime-types": "^2.1.35",
-    "open": "^8.4.0"
-  }
+	"name": "@titodp/server",
+	"version": "2.0.13",
+	"description": "Press F12 on any Windows Explorer folder to fire a node server. autohotkey + batch + node.",
+	"main": "index.js",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/titoBouzout/server.git"
+	},
+	"keywords": ["server"],
+	"author": "Tito Bouzout",
+	"license": "GPL",
+	"bugs": {
+		"url": "https://github.com/titoBouzout/server/issues"
+	},
+	"homepage": "https://github.com/titoBouzout/server#readme",
+	"prettier": {
+		"printWidth": 100,
+		"useTabs": true,
+		"semi": false,
+		"singleQuote": true,
+		"jsxSingleQuote": false,
+		"trailingComma": "all",
+		"bracketSpacing": true,
+		"jsxBracketSameLine": false,
+		"arrowParens": "avoid",
+		"quoteProps": "preserve",
+		"proseWrap": "preserve"
+	},
+	"dependencies": {
+		"mime-types": "^2.1.35",
+		"open": "^8.4.0"
+	}
 }

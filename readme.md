@@ -1,10 +1,9 @@
-# F12 Fires Node Server
+# F12 Fires A Node Server
 
 Press F12 on any Windows Explorer folder to fire a node server. Autohotkey + batch + node
 
-## Install
+## Installation
 
-- Run `npm install` to install `open` module, so the browser is detected automatically.
+- `npm install @titodp/server`
 - Install Autohotkey from https://www.autohotkey.com/
-- Right click `server-launcher.ahk` and from the submenu choose `Compile Script`
-- Add this folder to your enviroment PATH, so that way server.bat could be launch.
+- Right click `server-launcher.ahk` from this package folder (usually in `%AppData%/npm/node_modules@titodp/server`) and from the submenu choose `Compile Script`. You may want to add the compiled script to your startup so after a reboot still works.

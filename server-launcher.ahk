@@ -16,7 +16,7 @@ GetActiveExplorerPath() {
 ~F12::
     Path:= GetActiveExplorerPath()
     if (Path!="") {
-        Run, server.bat "%Path%",, Hide
+        Run, server "%Path%",, Hide
     }
 
 return
