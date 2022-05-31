@@ -1,8 +1,7 @@
 {
 	"name": "@titodp/server",
-	"version": "2.0.15",
+	"version": "2.0.16",
 	"description": "Press F12 on any Windows Explorer folder to fire a node server. autohotkey + batch + node.",
-
 	"bin": {
 		"server": "./index.js"
 	},
@@ -10,7 +9,9 @@
 		"type": "git",
 		"url": "git+https://github.com/titoBouzout/server.git"
 	},
-	"keywords": ["server"],
+	"keywords": [
+		"server"
+	],
 	"author": "Tito Bouzout",
 	"license": "GPL",
 	"bugs": {
