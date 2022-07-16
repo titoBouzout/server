@@ -4,7 +4,7 @@ Press F12 on any Windows Explorer folder to fire a node server. Autohotkey + bat
 
 ## Installation
 
-- `npm install @titodp/server`
+- `npm install -g @titodp/server`
 
 ## Usage
 
