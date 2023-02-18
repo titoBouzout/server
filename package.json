@@ -9,9 +9,7 @@
 		"type": "git",
 		"url": "git+https://github.com/titoBouzout/server.git"
 	},
-	"keywords": [
-		"server"
-	],
+	"keywords": ["server", "webserver", "localhost"],
 	"author": "Tito Bouzout",
 	"license": "GPL",
 	"bugs": {
