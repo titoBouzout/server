@@ -1,6 +1,6 @@
 {
 	"name": "@titodp/server",
-	"version": "2.0.20",
+	"version": "2.0.21",
 	"description": "Press F12 on any Windows Explorer folder to fire a node server. autohotkey + batch + node.",
 	"type": "module",
 	"bin": {
