@@ -12,6 +12,11 @@ console.log('root directory is: "' + root + '"')
 
 const port = seededRandom(1025, 65534)
 
+process.on('uncaughtException', function (err) {
+	// app.listen is already running
+	open('http://localhost:' + port + '/')
+})
+
 app.use(express.static(root), serveIndex('.', { 'icons': true }))
 
 app.listen(port, () => {
