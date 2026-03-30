@@ -35,8 +35,8 @@
 		"proseWrap": "preserve"
 	},
 	"dependencies": {
-		"express": "^4.21.1",
-		"open": "^8.4.2",
+		"express": "^5.2.1",
+		"open": "^11.0.0",
 		"serve-index": "^1.9.1"
 	}
 }
